@@ -12,25 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
         let isValid = true;
         const messages = [];
 
-        // Username Validation
         if (username.length < 3) {
             isValid = false;
             messages.push("Username must be at least 3 characters long.");
         }
 
-        // Email Validation
         if (!email.includes('@') || !email.includes('.')) {
             isValid = false;
             messages.push("Please enter a valid email address.");
         }
 
-        // Password Validation
         if (password.length < 8) {
             isValid = false;
             messages.push("Password must be at least 8 characters long.");
         }
 
-        // Display Feedback
         feedbackDiv.style.display = "block";
 
         if (isValid) {
