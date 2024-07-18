@@ -1,26 +1,26 @@
-document.addEventListener('DOMContentLoaded', function () {
-    function fetchUserData() {
+document.addEventListener('DOMContentLoaded', () => {
+    async function fetchUserData() {
         const apiUrl = 'https://jsonplaceholder.typicode.com/users';
         const dataContainer = document.getElementById('api-data');
 
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(users => {
-                dataContainer.innerHTML = ''; 
+        try {
+            const response = await fetch(apiUrl);
+            const users = await response.json();
 
-                const userList = document.createElement('ul');
+            dataContainer.innerHTML = '';
 
-                users.forEach(user => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = user.name;
-                    userList.appendChild(listItem);
-                });
+            const userList = document.createElement('ul');
 
-                dataContainer.appendChild(userList);
-            })
-            .catch(error => {
-                dataContainer.innerHTML = 'Failed to load user data.';
+            users.forEach(user => {
+                const listItem = document.createElement('li');
+                listItem.textContent = user.name;
+                userList.appendChild(listItem);
             });
+
+            dataContainer.appendChild(userList);
+        } catch (error) {
+            dataContainer.innerHTML = 'Failed to load user data.';
+        }
     }
 
     fetchUserData();
